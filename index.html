@@ -3,80 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thomas - Phone Xpress</title>
+  <title>Phone Xpress - Expérience Premium</title>
 
   <style>
     :root {
-      --px-blue: #1497e8;
-      --px-blue-light: #48caff;
-      --px-blue-dark: #045a95;
-      --px-white: #ffffff;
-      --px-soft: rgba(255,255,255,0.78);
-      --px-glass: rgba(4, 13, 22, 0.58);
-      --px-border: rgba(255,255,255,0.16);
+      --blue: #1497e8;
+      --blue-2: #44c7ff;
+      --blue-deep: #045a95;
+      --white: #ffffff;
+      --soft: rgba(255,255,255,0.78);
+      --glass: rgba(4, 13, 22, 0.54);
+      --glass-strong: rgba(3, 16, 28, 0.72);
     }
 
     * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
+      width: 100%;
+      height: auto;
+      min-height: 0;
       background: transparent;
-      color: var(--px-white);
+      color: var(--white);
       font-family: Arial, Helvetica, sans-serif;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     body {
-      padding: 24px 12px;
+      padding: 0;
     }
 
-    .px-about {
+    .px-experience {
       position: relative;
-      width: min(1220px, 100%);
+      width: min(1320px, 100%);
       margin: 0 auto;
+      padding: 8px;
       background: transparent;
       isolation: isolate;
     }
 
-    .px-aura {
+    .px-bg-aura {
       position: absolute;
-      inset: -18% -6%;
-      z-index: -3;
+      inset: -8% 0;
+      z-index: -4;
       background:
-        radial-gradient(circle at 18% 30%, rgba(20,151,232,0.38), transparent 30%),
-        radial-gradient(circle at 78% 18%, rgba(255,255,255,0.12), transparent 24%),
-        radial-gradient(circle at 74% 82%, rgba(20,151,232,0.26), transparent 32%);
+        radial-gradient(circle at 16% 32%, rgba(20,151,232,0.36), transparent 28%),
+        radial-gradient(circle at 50% 12%, rgba(255,255,255,0.13), transparent 23%),
+        radial-gradient(circle at 88% 62%, rgba(20,151,232,0.31), transparent 29%);
       filter: blur(34px);
-      animation: aura 7s ease-in-out infinite alternate;
+      animation: auraMove 7s ease-in-out infinite alternate;
     }
 
-    .px-grid {
+    .px-tech-grid {
       position: absolute;
       inset: 0;
-      z-index: -2;
-      opacity: 0.13;
+      z-index: -3;
+      opacity: 0.14;
       background-image:
-        linear-gradient(rgba(255,255,255,0.13) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.14) 1px, transparent 1px);
       background-size: 58px 58px;
-      mask-image: radial-gradient(circle, #000 0%, transparent 75%);
+      mask-image: radial-gradient(circle at center, #000 0%, transparent 72%);
     }
 
     .px-shell {
       position: relative;
       overflow: hidden;
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 24px;
-      align-items: center;
-      padding: 22px;
-      border-radius: 36px;
-      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 28px;
+      padding: 12px;
       background:
-        linear-gradient(135deg, rgba(255,255,255,0.13), rgba(255,255,255,0.035)),
+        linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.035)),
         rgba(0,0,0,0.10);
+      border: 1px solid rgba(255,255,255,0.15);
       box-shadow:
-        0 30px 90px rgba(0,0,0,0.34),
+        0 28px 90px rgba(0,0,0,0.34),
         inset 0 0 0 1px rgba(255,255,255,0.05);
       backdrop-filter: blur(16px);
     }
@@ -85,233 +85,226 @@
       content: "";
       position: absolute;
       inset: -60%;
-      background: linear-gradient(
-        115deg,
-        transparent 42%,
-        rgba(20,151,232,0.12) 45%,
-        rgba(255,255,255,0.52) 48%,
-        rgba(20,151,232,0.18) 51%,
-        transparent 56%
-      );
-      transform: translateX(-40%) rotate(8deg);
-      animation: scan 6.5s ease-in-out infinite;
+      background: conic-gradient(from 120deg, transparent, rgba(20,151,232,0.26), rgba(255,255,255,0.18), transparent 28%);
+      animation: spinLight 14s linear infinite;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .px-shell::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 27px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.16));
       pointer-events: none;
     }
 
-    .px-visual,
     .px-content {
       position: relative;
       z-index: 2;
+      display: grid;
+      grid-template-columns: 0.9fr 1.12fr 1fr;
+      gap: 14px;
+      align-items: stretch;
     }
 
-    .px-visual {
-      min-height: 520px;
-      border-radius: 30px;
+    .px-card {
+      position: relative;
       overflow: hidden;
-      border: 1px solid rgba(20,151,232,0.36);
+      min-height: 340px;
+      padding: 24px 22px;
+      border-radius: 22px;
       background:
-        radial-gradient(circle at 50% 0%, rgba(20,151,232,0.32), transparent 42%),
+        radial-gradient(circle at 18% 10%, rgba(255,255,255,0.13), transparent 29%),
+        radial-gradient(circle at 88% 80%, rgba(20,151,232,0.22), transparent 34%),
         linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02)),
-        rgba(4,13,22,0.58);
+        var(--glass);
+      border: 1px solid rgba(255,255,255,0.16);
       box-shadow:
-        0 28px 80px rgba(0,0,0,0.38),
-        0 0 42px rgba(20,151,232,0.22),
-        inset 0 0 0 1px rgba(255,255,255,0.06);
+        0 22px 62px rgba(0,0,0,0.28),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+      transform: translateY(18px);
+      opacity: 0;
+      animation: cardIn 0.9s cubic-bezier(.2,.8,.2,1) forwards;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
     }
 
-    .px-visual img {
-      width: 100%;
-      height: 100%;
-      min-height: 520px;
-      object-fit: cover;
-      display: block;
-      filter: contrast(1.04) saturate(1.06);
+    .px-card:nth-child(2) { animation-delay: .12s; }
+    .px-card:nth-child(3) { animation-delay: .24s; }
+
+    .px-card:hover {
+      transform: translateY(-7px) scale(1.01);
+      border-color: rgba(20,151,232,0.52);
+      box-shadow:
+        0 34px 82px rgba(0,0,0,0.44),
+        0 0 48px rgba(20,151,232,0.24),
+        inset 0 0 0 1px rgba(255,255,255,0.08);
     }
 
-    .px-visual::after {
+    .px-card::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, transparent 48%, rgba(0,0,0,0.58)),
-        radial-gradient(circle at 50% 5%, transparent 38%, rgba(4,13,22,0.26));
+      top: -80%;
+      left: -85%;
+      width: 110%;
+      height: 240%;
+      transform: rotate(18deg);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), rgba(20,151,232,0.34), transparent);
+      animation: lightSweep 5.5s ease-in-out infinite;
       pointer-events: none;
     }
 
-    .px-photo-note {
-      position: absolute;
-      left: 22px;
-      right: 22px;
-      bottom: 22px;
-      z-index: 3;
-      padding: 16px 18px;
-      border-radius: 20px;
-      background: rgba(4,13,22,0.64);
-      border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(12px);
+    .px-main {
+      min-height: 360px;
+      padding: 26px 26px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(68,199,255,0.34), transparent 35%),
+        radial-gradient(circle at 80% 90%, rgba(20,151,232,0.28), transparent 36%),
+        linear-gradient(145deg, rgba(20,151,232,0.28), rgba(0,0,0,0.21)),
+        var(--glass-strong);
+      border-color: rgba(20,151,232,0.5);
     }
 
-    .px-photo-note strong {
-      display: block;
-      font-size: 24px;
-      line-height: 1;
-      text-transform: uppercase;
-      letter-spacing: -0.6px;
-    }
-
-    .px-photo-note span {
-      display: block;
-      margin-top: 6px;
-      color: var(--px-blue-light);
-      font-weight: 900;
-      text-transform: uppercase;
-      font-size: 12px;
-      letter-spacing: 1px;
-    }
-
-    .px-content {
-      padding: 34px 28px;
+    .px-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
     .px-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 22px;
-      padding: 10px 14px;
+      max-width: 100%;
+      padding: 9px 13px;
       border-radius: 999px;
       background: rgba(20,151,232,0.15);
       border: 1px solid rgba(20,151,232,0.38);
       color: rgba(255,255,255,0.92);
       font-size: 12px;
       font-weight: 950;
-      letter-spacing: 0.9px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .px-dot {
       width: 8px;
       height: 8px;
+      flex: 0 0 8px;
       border-radius: 50%;
-      background: var(--px-blue);
-      box-shadow: 0 0 16px var(--px-blue);
+      background: var(--blue);
+      box-shadow: 0 0 15px var(--blue);
     }
 
-    h1 {
-      margin: 0 0 20px;
-      max-width: 650px;
-      font-size: clamp(42px, 5.2vw, 78px);
-      line-height: 0.92;
-      letter-spacing: -3px;
-      text-transform: uppercase;
+    .px-icon {
+      width: 50px;
+      height: 50px;
+      flex: 0 0 50px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 25px;
+      box-shadow: inset 0 0 22px rgba(255,255,255,0.06);
+    }
+
+    .px-number {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      margin: 0 0 14px;
+      font-size: clamp(48px, 6.8vw, 92px);
+      line-height: 0.86;
+      font-weight: 1000;
+      letter-spacing: -5px;
+      color: #fff;
       text-shadow:
-        0 0 20px rgba(20,151,232,0.72),
-        0 0 52px rgba(20,151,232,0.28);
+        0 0 17px rgba(20,151,232,0.95),
+        0 0 48px rgba(20,151,232,0.42);
     }
 
-    h1 span {
-      color: var(--px-blue-light);
+    .px-main .px-number {
+      font-size: clamp(64px, 8.4vw, 118px);
     }
 
-    .px-lead {
-      margin: 0 0 24px;
-      max-width: 620px;
-      color: rgba(255,255,255,0.86);
-      font-size: clamp(18px, 2vw, 22px);
-      line-height: 1.45;
-      font-weight: 700;
+    .px-number small {
+      margin-bottom: 8px;
+      font-size: .34em;
+      letter-spacing: 0;
+      font-weight: 950;
+    }
+
+    .px-title {
+      margin: 0 0 10px;
+      max-width: 100%;
+      font-size: clamp(22px, 2.25vw, 30px);
+      line-height: 0.98;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+      font-weight: 1000;
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+
+    .px-main .px-title {
+      font-size: clamp(28px, 3vw, 38px);
     }
 
     .px-text {
-      margin: 0 0 22px;
-      max-width: 620px;
-      color: var(--px-soft);
+      margin: 0;
+      max-width: 390px;
+      color: var(--soft);
       font-size: 16px;
-      line-height: 1.65;
+      line-height: 1.55;
       font-weight: 600;
     }
 
-    .px-values {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin: 30px 0;
-    }
-
-    .px-value {
-      min-height: 110px;
-      padding: 16px;
-      border-radius: 20px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.09), rgba(255,255,255,0.025)),
-        rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.13);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
-    }
-
-    .px-value b {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--px-blue-light);
-      font-size: 25px;
-      text-shadow: 0 0 15px rgba(20,151,232,0.72);
-    }
-
-    .px-value strong {
-      display: block;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-    }
-
-    .px-value span {
-      color: rgba(255,255,255,0.68);
-      font-size: 13px;
-      line-height: 1.35;
-      font-weight: 700;
-    }
-
-    .px-quote {
-      position: relative;
-      margin: 26px 0 0;
-      padding: 20px 22px;
-      border-radius: 22px;
-      background: rgba(20,151,232,0.12);
-      border: 1px solid rgba(20,151,232,0.28);
-      color: rgba(255,255,255,0.88);
+    .px-main .px-text {
       font-size: 17px;
-      line-height: 1.55;
-      font-weight: 750;
+      color: rgba(255,255,255,0.86);
     }
 
-    .px-quote::before {
-      content: "“";
+    .px-progress {
+      position: relative;
+      height: 8px;
+      margin-top: 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.13);
+      overflow: hidden;
+    }
+
+    .px-progress span {
       position: absolute;
-      top: -18px;
-      left: 18px;
-      color: rgba(20,151,232,0.55);
-      font-size: 72px;
-      line-height: 1;
-      font-weight: 900;
+      inset: 0 auto 0 0;
+      width: var(--w);
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue-deep), var(--blue), #fff);
+      box-shadow: 0 0 18px rgba(20,151,232,0.8);
+      transform-origin: left;
+      animation: progressGrow 1.4s ease both;
     }
 
-    .px-actions {
+    .px-cta {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 14px;
-      margin-top: 30px;
+      gap: 10px;
+      margin-top: 22px;
     }
 
     .px-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 54px;
-      padding: 0 24px;
+      min-height: 52px;
+      padding: 0 22px;
       border-radius: 17px;
-      background: linear-gradient(135deg, var(--px-blue), var(--px-blue-dark));
+      background: linear-gradient(135deg, var(--blue), var(--blue-deep));
       color: white;
       text-decoration: none;
       font-size: 14px;
@@ -327,109 +320,175 @@
       box-shadow: 0 25px 52px rgba(20,151,232,0.62);
     }
 
-    .px-small {
+    .px-ghost {
       color: rgba(255,255,255,0.72);
       font-size: 14px;
       font-weight: 800;
     }
 
-    @keyframes aura {
-      from { transform: scale(.98) translateY(6px); opacity: .72; }
-      to { transform: scale(1.035) translateY(-8px); opacity: 1; }
+    .px-stars {
+      display: flex;
+      gap: 6px;
+      margin: 22px 0 12px;
+      color: var(--blue);
+      font-size: 23px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 16px rgba(20,151,232,0.85);
     }
 
-    @keyframes scan {
-      0%, 35% { transform: translateX(-48%) rotate(8deg); opacity: 0; }
-      48% { opacity: 1; }
-      72%, 100% { transform: translateX(48%) rotate(8deg); opacity: 0; }
+    .px-review-box {
+      position: relative;
+      margin-top: 12px;
+      padding: 10px;
+      min-height: 105px;
+      max-height: 128px;
+      overflow: hidden;
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.14);
     }
 
-    @media (max-width: 950px) {
-      .px-shell {
+    .px-review-box::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 40px;
+      background: linear-gradient(transparent, rgba(4,13,22,0.94));
+      pointer-events: none;
+    }
+
+    .px-watermark {
+      position: absolute;
+      right: 20px;
+      bottom: 12px;
+      color: rgba(255,255,255,0.13);
+      font-size: 70px;
+      line-height: 1;
+      font-weight: 1000;
+      letter-spacing: -4px;
+      pointer-events: none;
+    }
+
+    .px-main .px-watermark { font-size: 82px; }
+
+    @keyframes auraMove {
+      from { transform: scale(.98) translateY(4px); opacity: .78; }
+      to { transform: scale(1.035) translateY(-6px); opacity: 1; }
+    }
+
+    @keyframes spinLight {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes cardIn {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes lightSweep {
+      0%, 38% { transform: translateX(-28%) rotate(18deg); opacity: 0; }
+      50% { opacity: 1; }
+      72%, 100% { transform: translateX(150%) rotate(18deg); opacity: 0; }
+    }
+
+    @keyframes progressGrow {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @media (max-width: 1050px) {
+      .px-content {
         grid-template-columns: 1fr;
       }
 
-      .px-visual,
-      .px-visual img {
-        min-height: 420px;
+      .px-card,
+      .px-main {
+        min-height: auto;
       }
 
-      .px-content {
-        padding: 24px 18px;
+      .px-bottom-strip {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    @media (max-width: 620px) {
+    @media (max-width: 560px) {
       body { padding: 14px 8px; }
+      .px-experience { padding: 6px; }
       .px-shell { padding: 10px; border-radius: 26px; }
-      .px-visual { border-radius: 22px; }
-      .px-visual,
-      .px-visual img { min-height: 360px; }
-      h1 { letter-spacing: -2px; }
-      .px-values { grid-template-columns: 1fr; }
-      .px-photo-note { left: 14px; right: 14px; bottom: 14px; }
+      .px-shell::after { border-radius: 25px; }
+      .px-card, .px-main { padding: 24px 20px; border-radius: 22px; }
+      .px-head { margin-bottom: 24px; }
+      .px-icon { width: 44px; height: 44px; flex-basis: 44px; }
+      .px-pill { font-size: 11px; padding: 8px 11px; }
+      .px-number { letter-spacing: -3px; }
+      .px-bottom-strip { grid-template-columns: 1fr; }
+      .px-watermark { font-size: 54px; }
     }
   </style>
 </head>
 
 <body>
-  <section class="px-about">
-    <div class="px-aura"></div>
-    <div class="px-grid"></div>
+  <main class="px-experience">
+    <div class="px-bg-aura"></div>
+    <div class="px-tech-grid"></div>
 
-    <div class="px-shell">
-      <div class="px-visual">
-        <!-- Remplace cette image par une vraie photo de Thomas ou ton personnage stylisé -->
-        <img src="thomas.png" alt="Thomas, fondateur et technicien Phone Xpress" />
-        <div class="px-photo-note">
-          <strong>Thomas</strong>
-          <span>Fondateur & technicien Phone Xpress</span>
-        </div>
-      </div>
-
+    <section class="px-shell" aria-label="Avantages Phone Xpress">
       <div class="px-content">
-        <div class="px-pill"><span class="px-dot"></span> Un seul expert, un vrai suivi</div>
-
-        <h1>Thomas, votre expert <span>Phone Xpress</span></h1>
-
-        <p class="px-lead">
-          Chez Phone Xpress, votre téléphone ne passe pas de main en main : Thomas s’occupe personnellement de chaque réparation.
-        </p>
-
-        <p class="px-text">
-          Fondateur de la boutique et technicien passionné, il gère chaque étape : l’accueil, le diagnostic, la réparation et les conseils après intervention. Une approche simple, directe et rassurante.
-        </p>
-
-        <div class="px-values">
-          <div class="px-value">
-            <b>⚡</b>
-            <strong>Rapide</strong>
-            <span>Un diagnostic clair et une prise en charge efficace.</span>
+        <article class="px-card">
+          <div class="px-head">
+            <span class="px-pill"><span class="px-dot"></span> Confiance</span>
+            <div class="px-icon">✓</div>
           </div>
 
-          <div class="px-value">
-            <b>🛠</b>
-            <strong>Précis</strong>
-            <span>Chaque réparation est réalisée avec soin et exigence.</span>
+          <div class="px-number" data-target="100">+100</div>
+          <h2 class="px-title">Clients satisfaits</h2>
+          <p class="px-text">Des réparations propres, rapides et réalisées avec soin pour redonner vie à votre smartphone.</p>
+          <div class="px-progress"><span style="--w:88%"></span></div>
+          
+        </article>
+
+        <article class="px-card px-main">
+          <div class="px-head">
+            <span class="px-pill"><span class="px-dot"></span> Réparation express</span>
+            <div class="px-icon">⚡</div>
           </div>
 
-          <div class="px-value">
-            <b>🤝</b>
-            <strong>Direct</strong>
-            <span>Un seul interlocuteur du début à la fin.</span>
+          <div class="px-number">30<small>min</small></div>
+          <h2 class="px-title">Un délai moyen qui change tout</h2>
+          <p class="px-text">Écran, batterie, vitre arrière, diagnostic : Phone Xpress va droit au problème pour vous faire gagner du temps.</p>
+
+          <div class="px-cta">
+            <a class="px-button" href="https://phonexpress.odoo.com/demande-de-devis" target="_blank" rel="noopener">Lancer le diagnostic</a>
+            <span class="px-ghost">Demande en ligne rapide</span>
           </div>
-        </div>
 
-        <div class="px-quote">
-          Ici, pas d’intermédiaire : votre appareil est entre les mains de la personne qui va réellement le réparer.
-        </div>
+          <div class="px-progress"><span style="--w:96%"></span></div>
+          
+        </article>
 
-        <div class="px-actions">
-          <a class="px-button" href="https://phonexpress.odoo.com/demande-de-devis" target="_blank" rel="noopener">Demander un diagnostic</a>
-          <span class="px-small">Réponse rapide · Devis clair · Réparation soignée</span>
-        </div>
+        <article class="px-card">
+          <div class="px-head">
+            <span class="px-pill"><span class="px-dot"></span> Avis Google</span>
+            <div class="px-icon">★</div>
+          </div>
+
+          <div class="px-number">4.7<small>/5</small></div>
+          <h2 class="px-title">Ils nous recommandent</h2>
+          <p class="px-text">Plus de 120 avis clients : la preuve sociale qui rassure avant même la prise de contact.</p>
+
+          <div class="px-stars" aria-label="Note Google 4.7 sur 5">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+
+          <div class="px-review-box">
+            <script src="https://elfsightcdn.com/platform.js" async></script>
+            <div class="elfsight-app-5f89ed93-18d6-45b4-9700-fc37cce6187b" data-elfsight-app-lazy></div>
+          </div>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 </body>
 </html>
