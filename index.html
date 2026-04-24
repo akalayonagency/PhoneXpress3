@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thomas - Phone Xpress</title>
+
+  <style>
+    :root {
+      --px-blue: #1497e8;
+      --px-blue-light: #48caff;
+      --px-blue-dark: #045a95;
+      --px-white: #ffffff;
+      --px-soft: rgba(255,255,255,0.78);
+      --px-glass: rgba(4, 13, 22, 0.58);
+      --px-border: rgba(255,255,255,0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      background: transparent;
+      color: var(--px-white);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body {
+      padding: 24px 12px;
+    }
+
+    .px-about {
+      position: relative;
+      width: min(1220px, 100%);
+      margin: 0 auto;
+      background: transparent;
+      isolation: isolate;
+    }
+
+    .px-aura {
+      position: absolute;
+      inset: -18% -6%;
+      z-index: -3;
+      background:
+        radial-gradient(circle at 18% 30%, rgba(20,151,232,0.38), transparent 30%),
+        radial-gradient(circle at 78% 18%, rgba(255,255,255,0.12), transparent 24%),
+        radial-gradient(circle at 74% 82%, rgba(20,151,232,0.26), transparent 32%);
+      filter: blur(34px);
+      animation: aura 7s ease-in-out infinite alternate;
+    }
+
+    .px-grid {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      opacity: 0.13;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.13) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: radial-gradient(circle, #000 0%, transparent 75%);
+    }
+
+    .px-shell {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 22px;
+      border-radius: 36px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.13), rgba(255,255,255,0.035)),
+        rgba(0,0,0,0.10);
+      box-shadow:
+        0 30px 90px rgba(0,0,0,0.34),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+      backdrop-filter: blur(16px);
+    }
+
+    .px-shell::before {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      background: linear-gradient(
+        115deg,
+        transparent 42%,
+        rgba(20,151,232,0.12) 45%,
+        rgba(255,255,255,0.52) 48%,
+        rgba(20,151,232,0.18) 51%,
+        transparent 56%
+      );
+      transform: translateX(-40%) rotate(8deg);
+      animation: scan 6.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .px-visual,
+    .px-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .px-visual {
+      min-height: 520px;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(20,151,232,0.36);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(20,151,232,0.32), transparent 42%),
+        linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02)),
+        rgba(4,13,22,0.58);
+      box-shadow:
+        0 28px 80px rgba(0,0,0,0.38),
+        0 0 42px rgba(20,151,232,0.22),
+        inset 0 0 0 1px rgba(255,255,255,0.06);
+    }
+
+    .px-visual img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.04) saturate(1.06);
+    }
+
+    .px-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 48%, rgba(0,0,0,0.58)),
+        radial-gradient(circle at 50% 5%, transparent 38%, rgba(4,13,22,0.26));
+      pointer-events: none;
+    }
+
+    .px-photo-note {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      z-index: 3;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(4,13,22,0.64);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(12px);
+    }
+
+    .px-photo-note strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: -0.6px;
+    }
+
+    .px-photo-note span {
+      display: block;
+      margin-top: 6px;
+      color: var(--px-blue-light);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .px-content {
+      padding: 34px 28px;
+    }
+
+    .px-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(20,151,232,0.15);
+      border: 1px solid rgba(20,151,232,0.38);
+      color: rgba(255,255,255,0.92);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+    }
+
+    .px-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--px-blue);
+      box-shadow: 0 0 16px var(--px-blue);
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      max-width: 650px;
+      font-size: clamp(42px, 5.2vw, 78px);
+      line-height: 0.92;
+      letter-spacing: -3px;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 20px rgba(20,151,232,0.72),
+        0 0 52px rgba(20,151,232,0.28);
+    }
+
+    h1 span {
+      color: var(--px-blue-light);
+    }
+
+    .px-lead {
+      margin: 0 0 24px;
+      max-width: 620px;
+      color: rgba(255,255,255,0.86);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .px-text {
+      margin: 0 0 22px;
+      max-width: 620px;
+      color: var(--px-soft);
+      font-size: 16px;
+      line-height: 1.65;
+      font-weight: 600;
+    }
+
+    .px-values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 30px 0;
+    }
+
+    .px-value {
+      min-height: 110px;
+      padding: 16px;
+      border-radius: 20px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.09), rgba(255,255,255,0.025)),
+        rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.13);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .px-value b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--px-blue-light);
+      font-size: 25px;
+      text-shadow: 0 0 15px rgba(20,151,232,0.72);
+    }
+
+    .px-value strong {
+      display: block;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .px-value span {
+      color: rgba(255,255,255,0.68);
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .px-quote {
+      position: relative;
+      margin: 26px 0 0;
+      padding: 20px 22px;
+      border-radius: 22px;
+      background: rgba(20,151,232,0.12);
+      border: 1px solid rgba(20,151,232,0.28);
+      color: rgba(255,255,255,0.88);
+      font-size: 17px;
+      line-height: 1.55;
+      font-weight: 750;
+    }
+
+    .px-quote::before {
+      content: "“";
+      position: absolute;
+      top: -18px;
+      left: 18px;
+      color: rgba(20,151,232,0.55);
+      font-size: 72px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .px-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .px-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 24px;
+      border-radius: 17px;
+      background: linear-gradient(135deg, var(--px-blue), var(--px-blue-dark));
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 1000;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      box-shadow: 0 18px 38px rgba(20,151,232,0.42);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .px-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 25px 52px rgba(20,151,232,0.62);
+    }
+
+    .px-small {
+      color: rgba(255,255,255,0.72);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    @keyframes aura {
+      from { transform: scale(.98) translateY(6px); opacity: .72; }
+      to { transform: scale(1.035) translateY(-8px); opacity: 1; }
+    }
+
+    @keyframes scan {
+      0%, 35% { transform: translateX(-48%) rotate(8deg); opacity: 0; }
+      48% { opacity: 1; }
+      72%, 100% { transform: translateX(48%) rotate(8deg); opacity: 0; }
+    }
+
+    @media (max-width: 950px) {
+      .px-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .px-visual,
+      .px-visual img {
+        min-height: 420px;
+      }
+
+      .px-content {
+        padding: 24px 18px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      body { padding: 14px 8px; }
+      .px-shell { padding: 10px; border-radius: 26px; }
+      .px-visual { border-radius: 22px; }
+      .px-visual,
+      .px-visual img { min-height: 360px; }
+      h1 { letter-spacing: -2px; }
+      .px-values { grid-template-columns: 1fr; }
+      .px-photo-note { left: 14px; right: 14px; bottom: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="px-about">
+    <div class="px-aura"></div>
+    <div class="px-grid"></div>
+
+    <div class="px-shell">
+      <div class="px-visual">
+        <!-- Remplace cette image par une vraie photo de Thomas ou ton personnage stylisé -->
+        <img src="https://akalayonagency.github.io/PhoneXpress/thomas-phone-xpress.png" alt="Thomas, fondateur et technicien Phone Xpress" />
+        <div class="px-photo-note">
+          <strong>Thomas</strong>
+          <span>Fondateur & technicien Phone Xpress</span>
+        </div>
+      </div>
+
+      <div class="px-content">
+        <div class="px-pill"><span class="px-dot"></span> Un seul expert, un vrai suivi</div>
+
+        <h1>Thomas, votre expert <span>Phone Xpress</span></h1>
+
+        <p class="px-lead">
+          Chez Phone Xpress, votre téléphone ne passe pas de main en main : Thomas s’occupe personnellement de chaque réparation.
+        </p>
+
+        <p class="px-text">
+          Fondateur de la boutique et technicien passionné, il gère chaque étape : l’accueil, le diagnostic, la réparation et les conseils après intervention. Une approche simple, directe et rassurante.
+        </p>
+
+        <div class="px-values">
+          <div class="px-value">
+            <b>⚡</b>
+            <strong>Rapide</strong>
+            <span>Un diagnostic clair et une prise en charge efficace.</span>
+          </div>
+
+          <div class="px-value">
+            <b>🛠</b>
+            <strong>Précis</strong>
+            <span>Chaque réparation est réalisée avec soin et exigence.</span>
+          </div>
+
+          <div class="px-value">
+            <b>🤝</b>
+            <strong>Direct</strong>
+            <span>Un seul interlocuteur du début à la fin.</span>
+          </div>
+        </div>
+
+        <div class="px-quote">
+          Ici, pas d’intermédiaire : votre appareil est entre les mains de la personne qui va réellement le réparer.
+        </div>
+
+        <div class="px-actions">
+          <a class="px-button" href="https://phonexpress.odoo.com/demande-de-devis" target="_blank" rel="noopener">Demander un diagnostic</a>
+          <span class="px-small">Réponse rapide · Devis clair · Réparation soignée</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
