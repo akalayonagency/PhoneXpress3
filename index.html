@@ -38,29 +38,9 @@
       isolation: isolate;
     }
 
-    .px-aura {
-      position: absolute;
-      inset: -18% -6%;
-      z-index: -3;
-      background:
-        radial-gradient(circle at 18% 30%, rgba(20,151,232,0.38), transparent 30%),
-        radial-gradient(circle at 78% 18%, rgba(255,255,255,0.12), transparent 24%),
-        radial-gradient(circle at 74% 82%, rgba(20,151,232,0.26), transparent 32%);
-      filter: blur(30px);
-      animation: aura 7s ease-in-out infinite alternate;
-    }
+    .px-aura { display: none; }
 
-    .px-grid {
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      opacity: 0.12;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.13) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px);
-      background-size: 58px 58px;
-      mask-image: radial-gradient(circle, #000 0%, transparent 75%);
-    }
+    .px-grid { display: none; }
 
     .px-shell {
       position: relative;
@@ -80,12 +60,20 @@
         inset 0 0 0 1px rgba(255,255,255,0.05);
       backdrop-filter: blur(16px);
     }
+    }
 
     .px-shell::before {
       content: "";
       position: absolute;
       inset: -60%;
-      background: linear-gradient(115deg, transparent 42%, rgba(20,151,232,0.12) 45%, rgba(255,255,255,0.48) 48%, rgba(20,151,232,0.16) 51%, transparent 56%);
+      background: linear-gradient(
+        115deg,
+        transparent 42%,
+        rgba(20,151,232,0.12) 45%,
+        rgba(255,255,255,0.48) 48%,
+        rgba(20,151,232,0.16) 51%,
+        transparent 56%
+      );
       transform: translateX(-40%) rotate(8deg);
       animation: scan 6.5s ease-in-out infinite;
       pointer-events: none;
@@ -358,7 +346,7 @@
 
     <div class="px-shell">
       <div class="px-visual">
-        <img src="thomas.png" alt="Thomas, fondateur et technicien Phone Xpress" />
+        <img src="https://akalayonagency.github.io/PhoneXpress/thomas-phone-xpress.png" alt="Thomas, fondateur et technicien Phone Xpress" />
         <div class="px-photo-note">
           <strong>Thomas</strong>
           <span>Fondateur & technicien Phone Xpress</span>
